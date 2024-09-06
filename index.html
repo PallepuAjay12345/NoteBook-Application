@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteBook</title>
+    <link rel="stylesheet" href="/Login/login.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body style="background-color: #fcfefe;">
+    <nav>
+        <img src="/assets/notes.png" style="height: 9vh;width: 9vh;margin-left: 2%;">
+        <br>
+        <h1 style="color: white;margin-left: 39%;align-self: center;font-size: 40px;">NoteBook</h1>
+    </nav>
+    <div class="container"
+        style="width: 80%;background-color: #ffffff;height: 90vh;margin-left: 10%;box-shadow: 0 2px 4px whitesmoke;border: 1px solid gainsboro;display: flex;justify-content: center;">
+        <div class="login-container">
+            <h1>LOGIN</h1>
+            <br>
+            <br>
+            <br>
+            <form id="loginForm" action="/login" method="post">
+                <h3>Username</h3>
+                <input type="text" id="name" name="name" placeholder="Username" required>
+                <h3>Password</h3>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <br>
+                <br>
+                <input type="submit" value="Login" id="loginForms">
+                <br>
+                <br>
+                <br>
+                <div style="display: flex;justify-content: center;">
+                    <pre
+                        style="font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Don't have an account yet?    </pre>
+                    <a href="/Register/register.html" style="text-decoration: none;font-weight: bolder;color: blue;">Sign Up</a>
+                </div>
+                <br>
+                <br>
+                <p id="errorMessage" style="color: red;"></p>
+            </form>
+        </div>
+    </div>
+    <script>
+        const loginForm = document.getElementById('loginForm');
+
+        loginForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, password })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error);
+                }
+
+                const data = await response.json();
+                const { accessToken } = data;
+
+                localStorage.setItem('accessToken', accessToken);
+                localStorage.setItem('user_name', name);
+
+                if (accessToken) {
+                    window.location.href ='/Dashboard/home.html';
+                }
+
+            } catch (error) {
+                document.getElementById('name').value = '';
+                document.getElementById('password').value = '';
+                const errorMessageElement = document.getElementById('errorMessage');
+                errorMessageElement.textContent = 'Invalid username or password. Please try again.';
+            }
+        });
+
+        // Check for existing accessToken when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const accessToken = localStorage.getItem('accessToken');
+            if (accessToken) {
+                window.location.href = '/Dashboard/home.html';
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>

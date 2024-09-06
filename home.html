@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteBook</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/Dashboard/style.css">
+    <link rel="stylesheet" href="/Login/login.css" </head>
+
+<body style="height: 100vh;width: 100vw;">
+
+    <nav>
+        <img src="/assets/notes.png" style="height: 9vh;width: 9vh;margin-left: 2%;">
+        <h1 style="color: white;margin-left: 39%;align-self: center;font-size: 40px;">NoteBook</h1>
+        <div class="logout-button">
+            <img src="/assets/logout.png" onclick="handleLogout()" alt="Logout" />
+        </div>
+
+        <!-- <input type="submit" value="LogOut" onclick="handleLogout()" style="margin: 30px 50px;height: 30px;width: 80px;border-radius: 5px;cursor: pointer;"> -->
+    </nav>
+    <div class="container"
+        style="height: 91vh; width: 100vw;background-color:whitesmoke;box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);display: flex;">
+        <div class="sidebar"
+            style="background-color: white;height: inherit; width: 30%;  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);border-right: 1.5px solid gray;padding: 10px;">
+            <div class="sidebar-head"
+                style="display: flex;align-items: center;padding-top: 10px;">
+                <h1 style="margin-right: 150px;font-size: 200%;">Notes</h1>
+                <a href="#" class="btn" style="margin-left: 44%;margin-right: 20px;"><i class="fa-solid fa-plus btn"
+                        style="font-size: 25px;color: black;"></i></a>
+                <a href="#" style="margin-right: 10px;"><i class="fa-solid fa-circle-info" style="font-size: 20px;color: black;"></i></a>
+            </div>
+            <div class="create"">
+                <!-- <input type=" text" name="note" placeholder="enter a note name" id="note-name">
+                <button id="create-btn">create</button> -->
+            </div>
+            <input type="text" name="search" placeholder="Search.." id="search">
+            <div style="max-height: calc(100% - 150px); overflow: auto;" id="leftScroll">
+                <div id="notes-container"></div>
+            </div>
+        </div>
+        <div class="main" style="display: flex;flex-direction: column;justify-content: space-between;">
+            <div class="content">
+                <!-- <form id="myForm">
+                    <input type="text" name="search" placeholder="Search.." >
+                </form> -->
+            </div>
+            <div style="height: 75vh;overflow: auto;" id="scrollContent">
+                <div class="content1" style="margin-top: 20px;"></div>
+            </div>
+            <div class="footer"
+                style="height: 10vh;width: 70vw;background-color:  #f0f0f0;visibility: hidden;  border: 1px solid #ccc;  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                <form>
+                    <i class="fa-solid fa-face-smile" style="margin-left: 20px;  cursor: pointer;font-size: 20px"></i>
+                    <i class="fa-solid fa-paperclip" style="cursor: pointer;margin-left: 20px;font-size: 20px"></i>
+                    <input type="text" placeholder="Eneter a text" name="text" id="text"
+                        style="height: 7vh;;width: 80%;border-radius: 10px;margin-left: 20px;margin-top: 10px;padding: 10px;font-size: 20px;border: 2px solid #ccc;"></input>
+                    <button id="send" type="submit"
+                        style="cursor: pointer;width: 50px;height: 20px;font-size: 20px;border: none;"><i
+                            class="fa-solid fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </div> >
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/Dashboard/script.js">
+</script>
+
+</html>

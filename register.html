@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+    <link rel="stylesheet" href="/Login/login.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body style="background-color: #fcfefe;">
+    <nav>
+        <img src="/assets/notes.png" style="height: 9vh;width: 9vh;margin-left: 2%;">
+        <h1 style="color: white;margin-left: 39%;align-self: center;font-size: 40px;">NoteBook</h1>
+    </nav>
+    <div class="container"
+        style="width: 80%; background-color: #ffffff;height: 90vh;margin-left: 10%;box-shadow: 0 2px 4px whitesmoke;border: 1px solid gainsboro;display: flex;justify-content: center;">
+        <div class="login-container" style="height: 60vh;">
+            <h1>REGISTER</h1>
+            <br>
+            <form action="/register" method="POST" id="registrationForm">
+                <h3>Username</h3>
+                <input type="text" id="name" name="name" placeholder="Username" required>
+                <h3>Email</h3>
+                <input type="email" id="email" name="email" placeholder="Email" required
+                    style="width: 300px;padding: 10px;margin: 8px 0;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;font-size: 16px;">
+                <h3>Password</h3>
+                <input type="password" id="password" placeholder="Password" name="password" required>
+                <h3>Confirm Password</h3>
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" name="confirmPassword"
+                    required>
+                <br><br>
+                <input type="submit" value="Register">
+                <br><br>
+                <div style="display: flex;justify-content: center;">
+                    <pre
+                        style="font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Do you have account!    </pre>
+                    <a href="/" style="text-decoration: none;font-weight: bolder;color: blue;">LogIn</a>
+                </div>
+                <p id="errorMessage" style="color: red;margin: 10px;margin-left: 60px;"></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const registrationForm = document.getElementById('registrationForm');
+
+        registrationForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            if (password !== confirmPassword) {
+                const errorMessageElement = document.getElementById('errorMessage');
+                errorMessageElement.textContent = "Passwords do not match!";
+                return;
+            }
+
+            try {
+                const response = await fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, email, password, confirmPassword })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error);
+                }
+
+                const data = await response.json();
+                const { accessToken } = data;
+                localStorage.setItem('accessToken', accessToken);
+                window.location.href = '/Dashboard/home.html';
+
+            } catch (error) {
+                const errorMessageElement = document.getElementById('errorMessage');
+                errorMessageElement.textContent = "Already user exist";
+            }
+        });
+    </script>
+</body>
+
+</html>

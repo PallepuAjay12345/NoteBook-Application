@@ -1,0 +1,67 @@
+nav {
+  background-color: #064e89;
+  height: 10vh;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  display: flex;
+  /* justify-content: space-evenly; */
+}
+
+.login-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 28vw; /* Default width for larger screens */
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container h1 {
+  margin-bottom: 20px;
+  color: #357AE8;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+  width: 300px;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.login-container input[type="submit"] {
+  width: 300px;
+  background-color: #0881a3;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-right: 0; /* Reset margin-right for default */
+}
+
+.login-container input[type="submit"]:hover {
+  background-color: #064e89;
+}
+
+/* Media query for smaller screens */
+@media only screen and (max-width: 1000px) {
+  .login-container {
+      width: 80%; /* Adjust width for smaller screens */
+      max-width: 400px; /* Limit maximum width */
+  }
+
+  .login-container input[type="submit"] {
+      width: 100%; /* Full width for submit button on smaller screens */
+      margin-right: 0; /* Reset margin-right */
+  }
+}
